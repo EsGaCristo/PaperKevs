@@ -12,20 +12,20 @@ router.use(cors());
 
 //* Agregaste lo de router.use y las dependencias cors y body
 
+const {Client } = require('pg');
+
+const client = new Client({
+user: 'postgres',
+host: 'localhost',
+database: 'Papeleria_Kevs',
+password: '7295',
+port: 5432,
+});
+
 router.get('/',(req,res)=>{
     //res.json(movies);
-
-    const {Client } = require('pg');
-
-        const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'Papeleria_Kevs',
-        password: '7295',
-        port: 5432,
-    });
     client.connect();
-    client.query('select  * from venta')
+    client.query('select  * from venta order by "fechaventa"')
         .then( response => {
             res.json(response.rows);
             client.end();

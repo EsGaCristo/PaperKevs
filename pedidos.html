@@ -120,14 +120,11 @@
 								<label for="contact_form_message">Dia de reparto </label>
 								<input id="contact_form_message" class="input_field contact_form_message" type="date"  required="required" data-error="Please, write us a message."></input>
 								
+								<!-- =============HERE=============-->
 								<div class="contact_form_container2">
-									<label for="pedidos[]">Seleccione pedidos</label> <br>	
-									<input id="rb1"  class="input_checkbox"	type="checkbox" name="pedidos[]" >Pedido 1 
-									<input id="rb2"  class="input_checkbox"	type="checkbox" name="pedidos[]" >Pedido 2 
-									<input id="rb3"  class="input_checkbox"	type="checkbox" name="pedidos[]" >Pedido 3 <br>
-									<input id="rb4"  class="input_checkbox"	type="checkbox" name="pedidos[]" >Pedido 4 
-									<input id="rb5"  class="input_checkbox"	type="checkbox" name="pedidos[]" >Pedido 5 
-									<input id="rb6"  class="input_checkbox"	type="checkbox" name="pedidos[]" >Pedido 6 <br>
+									<ul class="list-group" id="listaPedidos">
+										
+									</ul>
 								</div>		
 
 								<button id="contact_send_btn" type="button" class="contact_send_btn trans_200" value="Submit">Ver ruta</button>
@@ -289,6 +286,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="js/contact_custom.js"></script>
+<script>
+	function llenarTabla() {
+  fetch(
+    "http://localhost:3000/api/pedidos")
+      .then((response) => response.json())
+      .then((pedidos) => {
+        //let tablaUsuarios = document.querySelector("#lista-poblaciones tbody");
+		const lista = document.getElementById("listaPedidos");
+		pedidos.forEach(element => {
+			let elemntHtml = document.createElement("li");
+			elemntHtml.className = "list-group-item";
+			elemntHtml.innerHTML+= `
+			<input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox"> 
+			<label class="form-check-label" for="firstCheckbox">${ element.fechaventa}</label>
+			`;
+			lista.appendChild(elemntHtml);
+		});	
+  
+      })
+	  .catch(error => console.log('Error  : ' + error.message))
+}
+
+llenarTabla();
+</script>
 
 </body>
 </html>
