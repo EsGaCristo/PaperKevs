@@ -14,26 +14,28 @@ router.use(cors());
 
 const {Client } = require('pg');
 
-const client = new Client({
-user: 'postgres',
-host: 'localhost',
-database: 'Papeleria_Kevs',
-password: '7295',
-port: 5432,
-});
+
 
 router.get('/',(req,res)=>{
+    text = "select  idventa , to_char(fechaventa,'YYYY-MON-DD') as fecha,total  from venta order by fechaventa  desc";
     //res.json(movies);
+
+    const client = new Client({
+        user: 'postgres',
+        host: 'localhost',
+        database: 'Papeleria_Kevs',
+        password: '7295',
+        port: 5432,
+        });
+
     client.connect();
-    client.query('select  * from venta order by "fechaventa"')
+    client.query(text)
         .then( response => {
             res.json(response.rows);
             client.end();
             return res.rows;
         })  
-        .catch(err =>{
-            client.end();
-        })
+        .catch(error => console.log('Error  : ' + error.message))
 });
 
 
