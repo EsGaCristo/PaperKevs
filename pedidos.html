@@ -127,7 +127,7 @@
 									</ul>
 								</div>		
 
-								<button id="contact_send_btn" type="button" class="contact_send_btn trans_200" value="Submit">Ver ruta</button>
+								<button id="contact_send_btn" onclick="tomarRutas()"; type="button" class="contact_send_btn trans_200" value="Submit">Ver ruta</button>
 								
 								
 							</form>
@@ -288,7 +288,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
 <script src="js/contact_custom.js"></script>
 <script>
 	let aux = 0;
-	function llenarTabla() {
+	function llenarPedidos() {
 	  	fetch("http://localhost:3000/api/pedidos")
 		.then((response) => response.json())
 		.then((pedidos) => {
@@ -297,9 +297,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
 			pedidos.forEach(element => {
 				let elemntHtml = document.createElement("li");
 				elemntHtml.className = "list-group-item";
-				elemntHtml.id=`${element.idventa}`;
+
 				elemntHtml.innerHTML+= `
-				<input class="form-check-input me-1" type="checkbox" > 
+				<input id= "${element.idventa}"  class="form-check-input me-1 valores" type="checkbox" > 
 				<label class="form-check-label" for="firstCheckbox">${ element.fecha}</label>
 				`;
 				lista.appendChild(elemntHtml);
@@ -308,8 +308,15 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
 		})
 	  .catch(error => console.log('Error  : ' + error.message))
 }
-
-llenarTabla();
+llenarPedidos();
+</script>
+<script>
+function tomarRutas(){
+	var checks = document.querySelectorAll('.valores')
+	checks.forEach((e) =>{
+		console.log(e.id);
+	});
+}
 </script>
 
 </body>
