@@ -314,7 +314,9 @@ llenarPedidos();
 function tomarRutas(){
 	var checks = document.querySelectorAll('.valores')
 	checks.forEach((e) =>{
+		if(e.checked == true){
 		console.log(e.id);
+	}
 	});
 }
 </script>
