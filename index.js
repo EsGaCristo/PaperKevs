@@ -22,7 +22,7 @@ app.use(
 
 //? routes
 app.get('/api/pedidos',db.getDatos);
-//app.post('/api/insertar/:id',db.insertDatos);
+app.post('/api/insertarPedidos',db.insertDatos);
 app.delete('/api/pedidos/:id',db.deleteVenta)
 
 //starting the server

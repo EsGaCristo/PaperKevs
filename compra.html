@@ -313,10 +313,29 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
 <script src="js/contact_custom.js"></script>
 <script>
 	function CrearPedido(){
-		var url = 'http://localhost:3000/api/pedidos/'
+
+		let fecha = document.getElementById("contact_form_message_Date_hoy").value;
+		var url = 'http://localhost:3000/api/insertarPedidos'
 		const lng = document.getElementById("lngCampo").value;
 		const lat = document.getElementById("latCampo").value;
+		
+		
+		fetch(url,{
+			method:'POST',
+			headers:{
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({
+				total: 50,
+				lat: 5,
+				lng:5
 
+			})
+		})
+		.then(res => res.json())
+		.then(data =>{
+			console.log("se logro");
+		})
 		
 		
 	}

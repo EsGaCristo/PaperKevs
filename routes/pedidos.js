@@ -36,16 +36,16 @@ const deleteVenta  = (req,res)=>{
 // post
 const insertDatos = (req,res)=>{
 
-  console.log(parseInt(req.params.id));
-  /*const {fechaventa, total, idempleado, lat,lng} = req.body;
-  pool.query('INSERT INTO venta (fechaventa, total, idempleado, lat, lng) values ($1 ,$2 ,$3, $4, $5)',
-  [fechaventa, total, idempleado, lat,lng] ,(error,filas)=>{
-
-    if (error) {
-      throw error
+  const {total,lat,lng} = req.body;
+  let sql = "INSERT INTO venta (total,lat,lng) values ($1,$2,$3)"
+              
+  pool.query(sql,[total,lat,lng],(err,result)=>{
+    if(err){
+      throw err
     }
-    res.send(filas);
-  })*/
+    res.send(result)
+  })
+  
 }
 
 module.exports = {
