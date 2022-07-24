@@ -1,3 +1,59 @@
+const { response } = require('express');
+const {Pool} = require('pg')
+const config = {
+  user: 'postgres',
+  host: 'localhost',
+  database: 'Papeleria_Kevs',
+  password: '7295',
+  port: 5432,
+  }
+const pool = new Pool(config);
+
+
+const getDatos = (req,res)=>{
+    var auxtxt = "select  idventa , to_char(fechaventa,'YYYY-MON-DD') as fecha,total  from venta order by fechaventa  desc";
+    pool.query(auxtxt,(error,results)=>{
+      if(error){
+        throw error
+      }
+      res.status(200).json(results.rows)
+      //return results.rows;
+    })
+}
+
+
+//Metodo para borrar y ver si funciona
+const deleteVenta  = (req,res)=>{
+  const id = parseInt(req.params.id);
+  pool.query('delete from venta  where  idventa = ?',[id],(error,filas)=>{
+    if(error){
+      throw error
+    }
+    res.send(filas)
+  })
+}
+
+// post
+const insertDatos = (req,res)=>{
+
+  console.log(parseInt(req.params.id));
+  /*const {fechaventa, total, idempleado, lat,lng} = req.body;
+  pool.query('INSERT INTO venta (fechaventa, total, idempleado, lat, lng) values ($1 ,$2 ,$3, $4, $5)',
+  [fechaventa, total, idempleado, lat,lng] ,(error,filas)=>{
+
+    if (error) {
+      throw error
+    }
+    res.send(filas);
+  })*/
+}
+
+module.exports = {
+    getDatos,
+    insertDatos,
+    deleteVenta
+}
+/*
 const { Router } = require('express');
 //const _ = require('underscore')); //! ????
 const router = Router();
@@ -38,6 +94,11 @@ router.get('/',(req,res)=>{
         .catch(error => console.log('Error  : ' + error.message))
 });
 
-
+const insertK = (req,res)=>{
+  console.log("probando insertar")
+}
 
 module.exports = router;
+module.exports = insertK;
+
+ */

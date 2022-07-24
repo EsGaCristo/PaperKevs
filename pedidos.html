@@ -283,13 +283,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos
 <script src="plugins/greensock/animation.gsap.min.js"></script>
 <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
 <script src="plugins/scrollTo/jquery.scrollTo.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCIwF204lFZg1y4kPSIhKaHEXMLYxxuMhA"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=&callback=iniciarMapa"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="js/contact_custom.js"></script>
 <script>
 	let aux = 0;
 	function llenarPedidos() {
-	  	fetch("http://localhost:3000/api/pedidos")
+	  	fetch("http://localhost:3000/api/pedidos" )
 		.then((response) => response.json())
 		.then((pedidos) => {
 			//let tablaUsuarios = document.querySelector("#lista-poblaciones tbody");
